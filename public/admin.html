@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Write Story</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; padding: 20px; }
+        input, textarea { width: 100%; margin: 10px 0; padding: 10px; background: #222; color: white; border: 1px solid #d4af37; }
+        button { background: #d4af37; padding: 10px; width: 100%; font-weight: bold; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Post a New Story</h2>
+    <input id="title" placeholder="Title">
+    <textarea id="content" placeholder="Write your story here..." rows="10"></textarea>
+    <button onclick="postStory()">Post Story</button>
+
+    <script>
+        async function postStory() {
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            // This is a public test version; we'll add the login lock next!
+            await fetch('/api/stories', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, content })
+            });
+            alert('Story Posted!');
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>
