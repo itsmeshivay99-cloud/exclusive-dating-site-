@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exclusive Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; text-align: center; }
+        .gold { color: #d4af37; }
+        .card { background: #1e1e1e; margin: 20px; padding: 20px; border-radius: 10px; border: 1px solid #333; }
+    </style>
+</head>
+<body>
+    <h1 class="gold">EXCLUSIVE STORIES</h1>
+    <div id="content">Loading...</div>
+
+    <script>
+        async function load() {
+            const res = await fetch('/api/stories');
+            const data = await res.json();
+            document.getElementById('content').innerHTML = data.map(s => `
+                <div class="card">
+                    <h2 class="gold">${s.title}</h2>
+                    <p>${s.content}</p>
+                </div>
+            `).join('');
+        }
+        load();
+    </script>
+</body>
+</html>
